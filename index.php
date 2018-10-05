@@ -9,6 +9,8 @@
 			<input type="text" name="firstname"><br>
 			Last name:<br>
 			<input type="text" name="lastname">
+			Email:<br>
+			<input type="text" name="email"><br>
 		</form>
 		<?php
 	    		
