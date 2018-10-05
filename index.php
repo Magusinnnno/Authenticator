@@ -13,6 +13,5 @@
 		<?php
 	    		
 		?>
-		</form>
 	</body>
 </html> 
