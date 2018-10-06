@@ -60,7 +60,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
     if ($recuperador!="") {
 
       // the message
-      $msg = "Fes click a aquest enllaç per accedir a una pàgina per restablir la teva contrasenya: http://algunFitxer.php/$recuperador";
+      $msg = "Fes click a aquest enllaç per accedir a una pàgina per restablir la teva contrasenya: http://algunFitxer.php?$recuperador";
 
       // use wordwrap() if lines are longer than 70 characters
       $msg = wordwrap($msg,70);
