@@ -55,7 +55,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
     si existeix llavors agafar el "recuperador" i guardar-lo en una variable
     $recuperador = ...
     */
-    $recuperador="shfgfc";
+    $recuperador="";
 
     if ($recuperador!="") {
 
@@ -66,7 +66,7 @@ if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
       $msg = wordwrap($msg,70);
       
       // send email
-      if (imap_mail ("$email","Recuperar contrasenya",$msg)==true) {
+      if (mail("$email","Recuperar contrasenya",$msg)) {
         echo "E-mail correcte, t'hem enviat un correu amb lo necessari per restablir la teva contrasenya. \n";
       }
       
