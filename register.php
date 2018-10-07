@@ -1,34 +1,31 @@
-<!DOCTYPE html>
-<html>
+<?php
+echo '<!DOCTYPE html>
+<html lang="ca">
 	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Register a new account</title>
 	</head>
 	<body>
-		<?php>
-		try {
-		    $conn = new PDO("sqlsrv:server = tcp:gddv.database.windows.net,1433; Database = sm", "sm", "{your_password_here}");
-		    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		}
-		catch (PDOException $e) {
-		    print("Error connecting to SQL Server.");
-		    die(print_r($e));
-		}
-
-		// SQL Server Extension Sample Code:
-		$connectionInfo = array("UID" => "sm@gddv", "pwd" => "{your_password_here}", "Database" => "sm", "LoginTimeout" => 30, "Encrypt" => 1, "TrustServerCertificate" => 0);
-		$serverName = "tcp:gddv.database.windows.net,1433";
-		$conn = sqlsrv_connect($serverName, $connectionInfo);
-		?>
-		<form>
+		<h1>Register a new account</h1>
+		<form action="./check.php" method="post" target="_self">
 			First name:<br>
 			<input type="text" name="firstname"><br>
 			Last name:<br>
 			<input type="text" name="lastname"><br>
 			Email:<br>
 			<input type="text" name="email"><br>
+			Nickname: <br>
+			<input type="text" name="nick"><br>
+			Password: <br>
+			<input type="password" name="password"><br>
+			<input type="submit" value="Register" />
 		</form>
-		<?php
-	    		
-		?>
+		<hr>
+		<footer>
+			<p>All rights reserved &copy; 2018 by Adrià Gómez, Pau Olivés and Sergio Rustarazo.</p>
+			<hr>
+		</footer>
 	</body>
-</html> 
+</html>'
+?>
