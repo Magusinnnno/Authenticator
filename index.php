@@ -32,11 +32,20 @@
 	</head>
 	<body>
 		<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			Username:<br>
-			<input type="text" name="user"><br>
-			Password:<br>
-			<input type="text" name="pass"><br>
-			<input type="submit" name="submit" value="Submit">  
+
+			<div class="container">
+				<label for="uname"><b>Username</b></label>
+				<input type="text" placeholder="Enter Username" name="uname" required>
+
+				<label for="psw"><b>Password</b></label>
+				<input type="password" placeholder="Enter Password" name="psw" required>
+
+				<button type="submit">Login</button>
+			</div>
+
+			<div class="container" style="background-color:#f1f1f1">
+				<span class="psw">Forgot <a href="#">password?</a></span>
+			</div> 
 		</form>
 	</body>
 </html> 
