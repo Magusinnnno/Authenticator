@@ -1,6 +1,6 @@
 <?php
 echo '<!DOCTYPE html>
-<html lang="ca">
+<html lang="en">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,16 +16,18 @@ echo '<!DOCTYPE html>
 			Age:<br>
 			<input type="number" name="age" min="12" max="120"><br>
 			Email:<br>
-			<input type="text" name="email"><br>
-			Nickname: <br>
+			<input type="email" name="email"><br>
+			Nickname:<br>
 			<input type="text" name="nick"><br>
-			Password: <br>
+			Password:<br>
 			<input type="password" name="password"><br>
+			Repeat your Password:<br>
+			<input type="password" name="repassword"><br>
 			<ul>
 				<li>Password must have a minimum of 8 characters</li>
 				<li>Password must include at least one number</li>
-				<li>Password must include at least one uppercase word</li>
-				<li>Password must include at least one lowercase word</li>
+				<li>Password must include at least one uppercase letter</li>
+				<li>Password must include at least one lowercase letter</li>
 			</ul>  
 			<br>
 			<input type="submit" value="Register" />
