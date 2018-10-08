@@ -27,6 +27,7 @@
 
 			<div class="container" style="background-color:#f1f1f1">
 				<span class="psw">Forgot <a href="recovery.php">password?</a></span>
+				<p> <a href="register.php">New user?</a></p>
 			</div> 
 		</form>
 	</body>
