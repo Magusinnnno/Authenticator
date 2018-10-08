@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<?php
-		$cookie_name_user = "user";
-		$cookie_name_pass = "pass";
 		$user = $pass = "";
-		if(isset($_COOKIE[$cookie_name_user])) {
-			$user = $_COOKIE[$cookie_name_user];
+		if(isset($_COOKIE["user"])) {
+			$user = $_COOKIE["user"];
 		}
-		if(isset($_COOKIE[$cookie_name_pass])) {
-			$pass = $_COOKIE[$cookie_name_pass];
+		if(isset($_COOKIE["pass"])) {
+			$pass = $_COOKIE["pass"];
 		}
 	?>
 	<head>
