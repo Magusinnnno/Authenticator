@@ -27,9 +27,26 @@
 			return $data;
 		}
 		
-		// Buscar usuari a la base de dades i comparar contrasenyes
+		// Buscar usuari a la base de dades i agafar contrasenya encriptada $savedPass
 		
-		if (true) { // si el login es correcte
+		// Encripting password
+		$res = "";
+		for ($pos=0; $pos < strlen($user); $pos ++) {
+			$byte = substr($user, $pos);
+			$res += ord($byte) * (pos + 1);
+		}
+		srand($res);
+		
+		$newpass = array();
+		for ($pos=0; $pos < strlen($pass); $pos ++) {
+			$byte = substr($pass, $pos);
+			$res = chr(($byte * rand()) % 256);
+			array_push($newpass, $res);
+		}
+		
+		$checkPass = implode("", $newpass);
+	
+		if (strcmp($checkPass, $savedPass) == 0) { // si el login es correcte
 			setcookie("user", $user, time() + (86400 * 30), "/");
 			setcookie("pass", $pass, time() + (86400 * 30), "/");
 			echo "Hello " . $user . "<br>";
