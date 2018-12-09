@@ -1,4 +1,15 @@
 <?php
+
+function checkPawnedPasswords(string $password) : int
+{
+    $sha1 = strtoupper(sha1($password));
+    $data = file_get_contents('https://api.pwnedpasswords.com/range/'.substr($sha1,0,5));
+    if (FALSE!==strpos($data,substr($sha1, 5))) {
+        $data = explode(substr($sha1, 5).':',$data);
+        $count = (int) $data[1];
+    }
+    return $count ?? 0;
+}
 // Initialize the session
 session_start();
  
@@ -11,13 +22,16 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
 // Include config file
 require_once "config.php";
  
+
+
 // Define variables and initialize with empty values
 $username = $password = "";
 $username_err = $password_err = "";
  
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
- 
+
+
     // Check if username is empty
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter username.";

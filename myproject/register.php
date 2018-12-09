@@ -1,4 +1,16 @@
 <?php
+
+function checkPawnedPasswords(string $password) : int
+{
+    $sha1 = strtoupper(sha1($password));
+    $data = file_get_contents('https://api.pwnedpasswords.com/range/'.substr($sha1,0,5));
+    if (FALSE!==strpos($data,substr($sha1, 5))) {
+        $data = explode(substr($sha1, 5).':',$data);
+        $count = (int) $data[1];
+    }
+    return $count ?? 0;
+}
+
 // Include config file
 require_once "config.php";
  
@@ -9,6 +21,8 @@ $username_err = $password_err = $confirm_password_err = "";
 // Processing form data when form is submitted
 if($_SERVER["REQUEST_METHOD"] == "POST"){
  
+    
+    
     // Validate username
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
@@ -27,7 +41,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(mysqli_stmt_execute($stmt)){
                 /* store result */
                 mysqli_stmt_store_result($stmt);
-                
                 if(mysqli_stmt_num_rows($stmt) == 1){
                     $username_err = "This username is already taken.";
                 } else{
@@ -45,11 +58,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate password
     if(empty(trim($_POST["password"]))){
         $password_err = "Please enter a password.";     
-    } elseif(strlen(trim($_POST["password"])) < 6){
-        $password_err = "Password must have atleast 6 characters.";
+    } elseif(strlen(trim($_POST["password"])) < 8){
+        $password_err = "Password must have atleast 8 characters.";
+  
     } else{
         $password = trim($_POST["password"]);
+        $message = "This password has been seen ".checkPawnedPasswords($_POST["password"])." times before";
+        echo "<script type='text/javascript'>alert('$message');</script>";
+
+        
     }
+
+    
+   
     
     // Validate confirm password
     if(empty(trim($_POST["confirm_password"]))){
@@ -60,10 +81,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $confirm_password_err = "Password did not match.";
         }
     }
+
+    
+    
     
     // Check input errors before inserting in database
     if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
+
         
+
         // Prepare an insert statement
         $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
          
@@ -73,6 +99,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             // Set parameters
             $param_username = $username;
+			
             $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
             
             // Attempt to execute the prepared statement
@@ -90,7 +117,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     
     // Close connection
     mysqli_close($link);
+
 }
+     
 ?>
  
 <!DOCTYPE html>
@@ -116,7 +145,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>    
             <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                 <label>Password</label>
-                <input type="password" name="password" class="form-control" value="<?php echo $password; ?>">
+                <input type="password" id="pass" name="password" class="form-control" value="<?php echo $password; ?>">
                 <span class="help-block"><?php echo $password_err; ?></span>
             </div>
             <div class="form-group <?php echo (!empty($confirm_password_err)) ? 'has-error' : ''; ?>">
@@ -130,6 +159,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <p>Already have an account? <a href="login.php">Login here</a>.</p>
         </form>
-    </div>    
+    </div>  
+    
+
+
+      
 </body>
 </html>

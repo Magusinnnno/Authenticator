@@ -24,9 +24,9 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     <div class="wrapper">
         <h1>Benvingut</h1>
         <p>Estàs connectat al servidor</p>
-        <button onclick="location.href='/myproject/reset.php'">Canviar Contrasenya</button>
+        <button onclick="location.href='/aut/reset.php'">Canviar Contrasenya</button>
 		<br /> <br /> 
-        <button onclick="location.href='/myproject/logout.php'">Tancar sessió</button>
+        <button onclick="location.href='/aut/logout.php'">Tancar sessió</button>
     </div>    
 </body>
 </html>
