@@ -1,5 +1,4 @@
 <?php
-
 function checkPawnedPasswords(string $password) : int
 {
     $sha1 = strtoupper(sha1($password));
@@ -10,6 +9,7 @@ function checkPawnedPasswords(string $password) : int
     }
     return $count ?? 0;
 }
+
 // Initialize the session
 session_start();
  
@@ -45,6 +45,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     } else{
         $password = trim($_POST["password"]);
     }
+
+ 
     
     // Validate credentials
     if(empty($username_err) && empty($password_err)){
@@ -75,7 +77,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                             // Store data in session variables
                             $_SESSION["loggedin"] = true;
                             $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;                            
+                            $_SESSION["username"] = $username;  
+                            $_SESSION["pwnedTimes"] = checkPawnedPasswords($_POST["password"]);                             
                             
                             // Redirect user to welcome page
                             header("location: welcome.php");
@@ -130,6 +133,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Login">
+                <a href="recovery.php" class="btn btn-default">I don't remember the password</a>
+
             </div>
             <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
         </form>

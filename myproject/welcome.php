@@ -7,13 +7,15 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
+
+echo "<div class='wrapper'> Your password has been seen ". $_SESSION["pwnedTimes"] ." times before </div>";
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Welcome</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
         body{ font: 14px sans-serif; }
@@ -22,11 +24,15 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 </head>
 <body>
     <div class="wrapper">
-        <h1>Benvingut</h1>
-        <p>Estàs connectat al servidor</p>
-        <button onclick="location.href='/aut/reset.php'">Canviar Contrasenya</button>
-		<br /> <br /> 
-        <button onclick="location.href='/aut/logout.php'">Tancar sessió</button>
+        <h1>Welcome</h1>
+        <p>You're connected to the server</p>
+        <div class="form-group">
+        <a href="reset.php" class="btn btn-default">Change password</a>
+        </div>
+        <div class="form-group">
+        <a href="logout.php" class="btn btn-primary">Logout</a>
+        </div>
+        
     </div>    
 </body>
 </html>
